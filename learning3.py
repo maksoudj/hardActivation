@@ -27,9 +27,10 @@ pat, test = train_test_split(pat, train_size=.75, test_size=.25)
 pat.reset_index(drop=True, inplace=True)
 test.reset_index(drop=True, inplace=True)
 dout = (pat[2])
+TE = 0.0
 for iterations in range(0, ite):
     ou = []
-    #TE = 0
+
     for pattern in range(0, np):
         net = 0
         for i in range(0, ni):
@@ -39,10 +40,15 @@ for iterations in range(0, ite):
        # TE += err
        # if (.0001 > err > 0) or (-.0001 < err < 0):
         #    break
+        TE += (err)**2
+        if TE <= 0.0001:
+            break
         learn = alpha * err
        # printdata(ite, pat, net, err, learn, ww)
         for i in range(0, ni):
             ww[i] = ww[i] + learn * pat[i][pattern]
+    
+    TE = 0.0
 
 plt.scatter(df1[1], df1[0])
 plt.scatter(df2[1], df2[0])
