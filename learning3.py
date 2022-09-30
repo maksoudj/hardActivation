@@ -14,8 +14,8 @@ def printdata (iteration, pattern, net, err, learn, ww):
     print("ite= ", iteration, ' pat= ', pattern, 'net= ', round(net, 5), 'err= ', err, 'lrn= ', learn,
           'weights= ', ww_formatted)
 
-ite = 1000
-np = 4000
+ite = 100
+np = 3000
 ni = 3
 alpha = .01
 ww = numpy.random.uniform(size=ni, low=-0.5, high=0.5)
@@ -23,9 +23,9 @@ print(ww)
 df1 = pd.read_excel('data.xlsx', sheet_name=0, usecols='A:C', nrows=2000, header=None)
 df2 = pd.read_excel('data.xlsx', sheet_name=0, usecols='A:C', nrows=2000, header=None, skiprows=2000)
 pat = pd.read_excel('data.xlsx', sheet_name=0, usecols='A:C', nrows=4000, header=None)
-pat = train_test_split(pat, train_size=.75, test_size=.25)
-#pat.reset_index(drop=True, inplace=True)
-#test.reset_index(drop=True, inplace=True)
+pat, test = train_test_split(pat, train_size=.75, test_size=.25)
+pat.reset_index(drop=True, inplace=True)
+test.reset_index(drop=True, inplace=True)
 dout = (pat[2])
 for iterations in range(0, ite):
     ou = []
